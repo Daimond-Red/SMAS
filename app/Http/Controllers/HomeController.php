@@ -5,10 +5,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
@@ -16,9 +16,6 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function adminLogin(){
-        return view('admin-login');
-    }
 
     public function index() {
         return view('home');
@@ -26,19 +23,21 @@ class HomeController extends Controller {
 
     public function activeAssetClient(){
 
-        $model = ApiData('getActiveAssets?clientID=3727');
+        $clientID = session('user')[0]->clientID;
+
+        $collection = ApiData('getActiveAssets?clientID='.$clientID);
         
-        return view('activeAssetClient.index', compact('model'));
+        return view('activeAssetClient.index', compact('collection'));
     }
 
-    public function activeAssetClientShow(request $request){
+    public function activeAssetClientShow($assetNo) {
+        
+        $clientID = session('user')[0]->clientID;
 
-        $model = ApiData('getActiveAssets?clientID=3727');
+        $collection = ApiData('getActiveAssets?clientID='.$clientID);
 
-        foreach($model as $model){
-            if($model->AssetNo == $request->assetNo){
-                return view('activeAssetClient.show', compact('model'));
-            }
+        foreach ($collection as $model) {
+            if($assetNo == $model->AssetNo) return view('activeAssetClient.show', compact('model'));
         }
     }
 }

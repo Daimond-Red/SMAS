@@ -17,8 +17,7 @@ class CheckAdminUser
     {
         
         if( (!auth()->check()) || (! ( isset(\auth()->user()->type) && in_array(\auth()->user()->type, [
-                    \App\User::SUPERADMIN,
-                    \App\User::ADMIN
+                    \App\User::SUPERADMIN
                 ])) )) {
             
             auth()->logout();

@@ -18,27 +18,25 @@ Auth::routes();
 
 //Route::any('register', function(){  }); // important to stop registration from admin
 
-Route::get('/home', 'HomeController@index')->name('admin.dashboard');
+Route::get('home', 'HomeController@index')->name('admin.dashboard');
 
 
-Route::get('/admin-login', 'HomeController@adminLogin')->name('admin-login');
+Route::group(['middleware' => 'admin.auth'], function() {
+	Route::get('/service-delivery', 'ServiceDeliveryController@index')->name('service-delivery');
+
+	Route::get('/service-delivery/show/{bookingId}', 'ServiceDeliveryController@show')->name('service-delivery-show');
+	Route::post('/service-delivery/filter', 'ServiceDeliveryController@filter')->name('service-delivery-filter');
+
+	Route::get('/accidental-delivery', 'AccidentalDeliveryController@index')->name('accidental-delivery');
+	Route::get('/accidental-delivery/show/{bookingId}', 'AccidentalDeliveryController@show')->name('accidental-delivery-show');
+	Route::get('/accidental-history', 'AccidentalDeliveryController@history')->name('accidental-history');
+	Route::get('/accidental-history/show/{bookingId}', 'AccidentalDeliveryController@historyShow')->name('accidental-history-show');
+
+	Route::get('/active-asset-client', 'HomeController@activeAssetClient')->name('active-asset-client');
+	Route::get('/active-asset-client/show/{assetNo}', 'HomeController@activeAssetClientShow')->name('active-asset-client-show');
+});
 
 
-Route::get('/service-delivery', 'ServiceDeliveryController@index')->name('service-delivery');
-Route::get('/service-delivery/show/{bookingId}', 'ServiceDeliveryController@show')->name('service-delivery-show');
-Route::post('/service-delivery/filter', 'ServiceDeliveryController@filter')->name('service-delivery-filter');
-
-
-
-Route::get('/accidental-delivery', 'AccidentalDeliveryController@index')->name('accidental-delivery');
-Route::get('/accidental-delivery/show/{bookingId}', 'AccidentalDeliveryController@show')->name('accidental-delivery-show');
-Route::get('/accidental-history', 'AccidentalDeliveryController@history')->name('accidental-history');
-Route::get('/accidental-history/show/{bookingId}', 'AccidentalDeliveryController@historyShow')->name('accidental-history-show');
-
-
-
-Route::get('/active-asset-client', 'HomeController@activeAssetClient')->name('active-asset-client');
-Route::get('/active-asset-client/show/{assetNo}', 'HomeController@activeAssetClientShow')->name('active-asset-client-show');
 
 
 

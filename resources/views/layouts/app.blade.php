@@ -36,11 +36,7 @@
             outline:none;
             border:1px solid #3490dc;
         }
-        .btn-primary {
-            color: #fff;
-            background-color: #df5603!important;
-            border-color: #df5603!important;
-        }
+        
         .login-banner{
             position:absolute;
             right:0;

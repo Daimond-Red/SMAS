@@ -44,7 +44,7 @@
                                         </tr>
                                     </thead>
                                    <tbody>
-                                       @foreach($model as $model)
+                                       @foreach($collection as $model)
                                         <tr>
                                             <td><b>{{ $model->AssetNo }}</b></td>
                                             <td>{{ $model->FirstName }} {{ $model->LastName }}</td>

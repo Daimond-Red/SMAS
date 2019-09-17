@@ -11,12 +11,13 @@
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
-                    {{-- <button type="button" class="dataModel btn btn-brand btn-icon-sm"
+                    {{-- <button type="button" class="dataModel btn btn-primary btn-icon-sm"
                         data-id="#mainPanel"
                         data-title="Import"
-                        data-href="{{ route('admin.sales.create') }}" >
+                        data-href="" >
                         <i class="flaticon2-plus"></i> Import
                     </button> --}}
+                    <a href="" class="btn btn-primary btn-icon-sm"> Book Value Chart </a>
                 </div>
             </div>
             <div class="kt-portlet__body">
@@ -138,7 +139,7 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('.service-delivery-menu').addClass('kt-menu__item--active');
+            $('.active-asset-client').addClass('kt-menu__item--active');
         });
     </script>
 @stop

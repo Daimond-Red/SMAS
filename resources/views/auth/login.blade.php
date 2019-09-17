@@ -3,17 +3,25 @@
 @section('content')
 
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-md-5">
             <div class="custom-login">
                 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <h3 style="font-weight:600;" class="mb-5 text-center text-secondary">Sign In To Admin</h3>
+                        <h3 style="font-weight:600;" class="mb-5 text-secondary">Sign In To Admin</h3>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <span class="" role="alert">
+                                    <span>{{ $errors->first() }}</span>
+                                </span>
+                            </div>
+                        @endif
                         <div class="form-group row">
+                            
                             <div class="col-md-12">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus >
+                                <input id="mobile" type="mobile" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" placeholder="Mobile Number" value="{{ old('mobile') }}" required autofocus >
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -46,7 +54,7 @@
                                 </div>
                             </div>
                            
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-12">
@@ -59,6 +67,10 @@
                 </div>
             </div>
         </div>
+
+        
     </div>
 </div>
+
+<img class="login-banner" src="{{ getMediaUrl('img/login-banner.png') }}" alt="banner">
 @endsection

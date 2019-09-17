@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Session;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -39,9 +40,39 @@ class LoginController extends Controller
     }
 
     public function login(Request $request) {
+        
+        $data = [
+            'mobile' => \request('mobile'),
+            'regNum' => "",
+            'Email'  => "",
+            'password' => \request('password')
+        ];
 
-        auth()->loginUsingId(1);
-        return $this->sendLoginResponse($request);
+        $res = ApiPostData('LoginM/getLoginDetails', $data, "POST");
+
+        if($res->loginDetails->IsUser) {
+            
+            session(['user' => $res->results]);
+            
+            auth()->loginUsingId(1);
+
+            return $this->sendLoginResponse($request);
+
+        } else {
+            return redirect()->back()->withErrors( 'Enter wrong credentials.' );
+        }
+        
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        
+        $request->session()->forget('user');
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
     }
 
 }

@@ -498,6 +498,35 @@ function ApiData($extendUrl){
     
 }
 
+function ApiPostData($extendUrl, $data = [], $method = 'GET'){
+
+    $url = 'https://lapi.smasindia.com/api/'. $extendUrl;
+    $username = 'SalesForce';
+    $password = 'SFCrm@!9@-#$J';
+
+    try {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data) );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: application/json"
+        ]);
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $result = json_decode($response);
+        return $result;
+
+    } catch(\Exception $e) {
+
+    }
+    
+}
+
 function serviceDeliveryCount($day){
     $model = ApiData('ServiceDeliveryDetails?clientID=1507');
     $count = 0;
