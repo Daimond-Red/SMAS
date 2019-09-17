@@ -1,0 +1,4 @@
+Store Cat,Store Name,Emp ID,Emp Name,Region,Store Ids,Email,Role
+A++,MALL OF INDIA BIG BOX,500160,Suraj Kumar,north,"5054367,5055810",test@example.com,bm
+B,AWADH MALL-LKW,500686,Kamal,north,5073615,,store_manager
+C,GUNTUR-AP,500419,Jugnu,north,5060215,,athlete
