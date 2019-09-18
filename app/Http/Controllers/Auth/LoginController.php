@@ -53,10 +53,11 @@ class LoginController extends Controller
         if($res->loginDetails->IsUser) {
             
             session(['user' => $res->results]);
+            session(['isUser' => $res->loginDetails->IsUser]);
             
-            auth()->loginUsingId(1);
+            // auth()->loginUsingId(1);
 
-            return $this->sendLoginResponse($request);
+            return redirect()->route('home');
 
         } else {
             return redirect()->back()->withErrors( 'Enter wrong credentials.' );

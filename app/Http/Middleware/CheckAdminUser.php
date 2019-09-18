@@ -16,9 +16,8 @@ class CheckAdminUser
     public function handle($request, Closure $next)
     {
         
-        if( (!auth()->check()) || (! ( isset(\auth()->user()->type) && in_array(\auth()->user()->type, [
-                    \App\User::SUPERADMIN
-                ])) )) {
+
+        if( !count(session('user')) || !session('isUser') ) {
             
             auth()->logout();
             return redirect('login');
