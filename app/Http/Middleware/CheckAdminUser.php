@@ -15,7 +15,6 @@ class CheckAdminUser
      */
     public function handle($request, Closure $next)
     {
-        
 
         if(  !session('isUser') ) {
             

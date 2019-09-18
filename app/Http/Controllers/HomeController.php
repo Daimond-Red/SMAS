@@ -26,7 +26,7 @@ class HomeController extends Controller {
         $clientID = session('user')[0]->clientID;
 
         $collection = ApiData('getActiveAssets?clientID='.$clientID);
-        
+
         return view('activeAssetClient.index', compact('collection'));
     }
 
@@ -39,5 +39,21 @@ class HomeController extends Controller {
         foreach ($collection as $model) {
             if($assetNo == $model->AssetNo) return view('activeAssetClient.show', compact('model'));
         }
+    }
+
+    public function bookValueChart() {
+        $quoteNo = session('user')[0]->clientID;
+        $collection = ApiData('getBookValueOfAssetByQuoteNo?Qno='.$quoteNo);
+
+        dd($collection);                                                                                                                                                  
+    }
+
+    public function terminationAsset($assetNo) {
+        
+        $model = ApiData('getTerminationByAssetNo?assetNo='.$assetNo);
+        // dd($model);
+        return view('activeAssetClient.termination', [
+            'model' => $model[0]
+        ]);
     }
 }

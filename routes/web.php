@@ -35,7 +35,9 @@ Route::group(['middleware' => 'admin.auth'], function() {
 	Route::get('/active-asset-client', 'HomeController@activeAssetClient')->name('active-asset-client');
 	Route::get('/active-asset-client/show/{assetNo}', 'HomeController@activeAssetClientShow')->name('active-asset-client-show');
 
-	Route::get('active-asset-client/book-value-chart/{quoteNo}', [ 'as' => 'active.assest.bookValue', 'uses' => 'HomeController@bookValueChart']);
+	Route::get('termination-of-asset/{assetNo}', ['as' => 'termination.asset', 'uses' => 'HomeController@terminationAsset']);
+
+	Route::get('book-value-chart', ['as' => 'admin.bookValueChart.index', 'uses' => 'HomeController@bookValueChart']);
 });
 
 

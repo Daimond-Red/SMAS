@@ -17,7 +17,7 @@
                         data-href="" >
                         <i class="flaticon2-plus"></i> Import
                     </button> --}}
-                    <a href="" class="btn btn-primary btn-icon-sm"> Book Value Chart </a>
+                    <a href="" class="btn btn-info btn-icon-sm"> Book Value Chart </a>
                 </div>
             </div>
             <div class="kt-portlet__body">
@@ -129,6 +129,23 @@
 
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    {{-- <h3 class="kt-portlet__head-title">
+                        Active Asset's Client Details
+                    </h3> --}}
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    {{-- <button type="button" class="dataModel btn btn-primary btn-icon-sm"
+                        data-id="#mainPanel"
+                        data-title="Import"
+                        data-href="" >
+                        <i class="flaticon2-plus"></i> Import
+                    </button> --}}
+                    {{-- <a href="" class="btn btn-primary btn-icon-sm"> Book Value Chart </a> --}}
+                    <a href="{{ route('termination.asset', $model->AssetNo) }}" class="btn btn-info btn-icon-sm"> Termination of Asset </a>
                 </div>
             </div>
         </div>
