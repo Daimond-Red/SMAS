@@ -54,7 +54,7 @@ class LoginController extends Controller
             
             session(['user' => $res->results]);
             session(['isUser' => $res->loginDetails->IsUser]);
-            
+
             // auth()->loginUsingId(1);
 
             return redirect()->route('home');
@@ -70,6 +70,8 @@ class LoginController extends Controller
         $this->guard()->logout();
         
         $request->session()->forget('user');
+
+        $request->session()->forget('isUser');
 
         $request->session()->invalidate();
 
