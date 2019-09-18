@@ -34,6 +34,8 @@ Route::group(['middleware' => 'admin.auth'], function() {
 
 	Route::get('/active-asset-client', 'HomeController@activeAssetClient')->name('active-asset-client');
 	Route::get('/active-asset-client/show/{assetNo}', 'HomeController@activeAssetClientShow')->name('active-asset-client-show');
+
+	Route::get('active-asset-client/book-value-chart/{quoteNo}', [ 'as' => '', 'uses' => 'HomeController@bookValueChart']);
 });
 
 

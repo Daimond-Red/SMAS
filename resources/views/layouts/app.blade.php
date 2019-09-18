@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ getMediaUrl('admin/assets/media/logos/favicon.ico')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{ getMediaUrl('admin/assets/media/logos/favicon.png')}}" />
     <style>
         body{
             background-color:white;
