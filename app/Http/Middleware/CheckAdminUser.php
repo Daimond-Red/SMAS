@@ -17,7 +17,7 @@ class CheckAdminUser
     {
         
 
-        if( !count(session('user')) || !session('isUser') ) {
+        if(  !session('isUser') ) {
             
             auth()->logout();
             return redirect('login');
