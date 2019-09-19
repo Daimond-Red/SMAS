@@ -376,6 +376,30 @@
         });
 
         $.validate();
+        
+        
+        $('.data-table-export').DataTable({
+            responsive: true,
+            "dom": 'lBfrtip',
+            "order": [[ 0, "desc" ]],
+            "oLanguage": {
+                "sEmptyTable": "No records found"
+            }, buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title : 'SMASCP-ExportData',
+                    exportOptions: {
+                        orthogonal: 'export',
+                        columns: "th:not(.noExport)"
+                    },
+                    text : 'Export'
+                },
+
+            ]
+        });
+
+        // $('.buttons-excel').html('Export');
+        
 
 	}
     // function geolocate() {
@@ -408,25 +432,6 @@
         //     responsive: true
         // });
       
-        $('.data-table-export').DataTable({
-            responsive: true,
-            "dom": 'lBfrtip',
-            "order": [[ 0, "desc" ]],
-            "oLanguage": {
-                "sEmptyTable": "No records found"
-            }, buttons: [
-                {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        orthogonal: 'export',
-                        columns: "th:not(.noExport)"
-                    }
-                },
-
-            ]
-        });
-
-        $('.buttons-excel').html('Export');
         $(".dataTable").wrap( "<div class='table-responsive'></div>" );
         
 		$('body').on('click', '.dataModel', function(e) {
@@ -538,10 +543,12 @@
             $.get(url, $('#search-form').serialize(), function(data){
                 changeTableContent(data, contentId);
                 initFancyBox();
+                init();
             });
         });
 
         $('body').on('click', '.sidebarSearchClear', function (e) {
+            e.preventDefault();
 
             var url = $('#search-form').attr('href');
             var contentId = $(this).attr('data-content');
@@ -551,6 +558,7 @@
                 $('#m_quick_sidebar_toggle').click();
                 $('#search-form').resetForm();
                 initFancyBox();
+                init();
             });
 
         });

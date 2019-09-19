@@ -27,6 +27,27 @@ class HomeController extends Controller {
 
         $collection = ApiData('getActiveAssets?clientID='.$clientID);
 
+        if(\request('isAjax') && $this->checkEmptyValue()) {
+
+            $data = [];
+
+            $from = strtotime(\request('from'));
+            $to = strtotime(\request('to'));
+            
+            foreach($collection as $model) {
+                // dd($model);
+                // $bookingDate = (int)strtotime($model->BookingDate);
+
+                if( ( \request('client_name')  && stristr($model->ClientName, \request('client_name')) ) ||
+                    ( \request('asset_number')  && stristr($model->AssetNo, \request('asset_number')) ) ||
+                    ( \request('City')  && stristr( $model->CityName, \request('City') ) )
+                ){
+                    $data[] = $model;
+                }
+            }
+            $collection = (object)$data;
+        } 
+
         return view('activeAssetClient.index', compact('collection'));
     }
 
