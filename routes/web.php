@@ -28,7 +28,7 @@ Route::group(['middleware' => 'admin.auth'], function() {
 
 	Route::get('/accidental-delivery', 'AccidentalDeliveryController@index')->name('accidental-delivery');
 	Route::get('/accidental-delivery/show/{bookingId}', 'AccidentalDeliveryController@show')->name('accidental-delivery-show');
-	
+
 	Route::get('/accidental-history', 'AccidentalDeliveryController@history')->name('accidental-history');
 	Route::get('/accidental-history/show/{bookingId}', 'AccidentalDeliveryController@historyShow')->name('accidental-history-show');
 
@@ -37,7 +37,7 @@ Route::group(['middleware' => 'admin.auth'], function() {
 
 	Route::get('termination-of-asset/{assetNo}', ['as' => 'termination.asset', 'uses' => 'HomeController@terminationAsset']);
 
-	Route::get('book-value-chart', ['as' => 'admin.bookValueChart.index', 'uses' => 'HomeController@bookValueChart']);
+	Route::get('book-value-chart/{assetNo}/{quoteNo}', ['as' => 'admin.bookValueChart.index', 'uses' => 'HomeController@bookValueChart']);
 });
 
 

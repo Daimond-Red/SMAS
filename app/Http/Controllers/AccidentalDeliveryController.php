@@ -36,12 +36,17 @@ class AccidentalDeliveryController extends Controller
         } else {
             $model = $collection;
         }
+
+        if(!$model) return abort(404);
+
         return view('accidentalDelivery.index', compact('model'));
     }
 
     public function show(request $request){
 
         $model = ApiData('getAccidentDeliveryTat?clientID=1507');
+        
+        if(!$model) return abort(404);
 
         foreach($model as $model){
             if($model->BookingNumber == $request->bookingId){
@@ -79,12 +84,17 @@ class AccidentalDeliveryController extends Controller
         } else {
             $model = $collection;
         }
+        
+        if(!$model) return abort(404);
+
         return view('accidentalDelivery.history', compact('model'));
     }
 
     public function historyShow(request $request){
 
         $model = ApiData('getAccidentalHistory?clientID=1507');
+        
+        if(!$model) return abort(404);
 
         foreach($model as $model){
             if($model->BookingNumber == $request->bookingId){

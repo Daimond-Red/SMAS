@@ -17,7 +17,7 @@
                         data-href="" >
                         <i class="flaticon2-plus"></i> Import
                     </button> --}}
-                    <a href="" class="btn btn-info btn-icon-sm"> Book Value Chart </a>
+                    <a href="{{ route('admin.bookValueChart.index', [$model->AssetNo, '700432' ]) }}" class="btn btn-info btn-icon-sm"> Book Value Chart </a>
                 </div>
             </div>
             <div class="kt-portlet__body">

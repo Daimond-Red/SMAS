@@ -38,12 +38,16 @@ class ServiceDeliveryController extends Controller
             $model = $collection;
         }
 
+        if(!$model) return abort(404);
+
         return view('serviceDelivery.index', compact('model'));
     }
 
     public function show(request $request){
 
         $model = ApiData('ServiceDeliveryDetails?clientID=1507');
+        
+        if(!$model) return abort(404);
 
         foreach($model as $model){
             if($model->BookingNumber == $request->bookingId){

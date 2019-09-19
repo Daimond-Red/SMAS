@@ -47,6 +47,8 @@ class HomeController extends Controller {
             }
             $collection = (object)$data;
         } 
+        
+        if(!$collection) return abort(404);
 
         return view('activeAssetClient.index', compact('collection'));
     }
@@ -56,25 +58,34 @@ class HomeController extends Controller {
         $clientID = session('user')[0]->clientID;
 
         $collection = ApiData('getActiveAssets?clientID='.$clientID);
+        
+        if(!$collection) return abort(404);
 
         foreach ($collection as $model) {
             if($assetNo == $model->AssetNo) return view('activeAssetClient.show', compact('model'));
         }
-    }
-
-    public function bookValueChart() {
-        $quoteNo = session('user')[0]->clientID;
-        $collection = ApiData('getBookValueOfAssetByQuoteNo?Qno='.$quoteNo);
-
-        dd($collection);                                                                                                                                                  
-    }
+    }    
 
     public function terminationAsset($assetNo) {
         
         $model = ApiData('getTerminationByAssetNo?assetNo='.$assetNo);
-        // dd($model);
+        
+        if(!$model) return abort(404);
+
         return view('activeAssetClient.termination', [
             'model' => $model[0]
         ]);
+    }
+
+    public function bookValueChart($assetNo, $quoteNo) {
+
+        $collection = ApiData('getBookValueOfAssetByQuoteNo?Qno='.$quoteNo);
+
+        if(!$collection) return abort(404);
+
+        return view('activeAssetClient.bookValueChart', [
+            'collection' => $collection,
+            'assetNo' => $assetNo
+        ]);                                                                                                                                                  
     }
 }
